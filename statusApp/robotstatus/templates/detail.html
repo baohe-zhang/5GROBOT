@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>History</title>
+</head>
+<body>
+	<a href="/status"><h4>Return</h4></a>
+	<div id="history" align="left">
+		<table border="1">
+			<tr>
+				<th>Time</th>
+				<th>Robot ID</th>
+				<th>IP Address</th>
+				<th>Command</th>
+				<th>Speed</th>
+				<th>Angle</th>
+				<th>Ttrack Status</th>
+				<th>Detect Status</th>
+			</tr>
+			{% for message in messages %}
+			<tr>
+				<td>{{message.time}}</td>
+				<td>{{message.robotId}}</td>
+				<td>{{message.ipAddress}}</td>
+				<td>{{message.command}}</td>
+				<td>{{message.speed}}</td>
+				<td>{{message.angle}}</td>
+				<td>{{message.trackStatus}}</td>
+				<td>{{message.detectStatus}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</body>
+</html>
