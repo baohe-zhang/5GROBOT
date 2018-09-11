@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Robot Control</title>
+	<style type="text/css">
+		.btn1 {
+			height: 80px;
+			width: 80px;
+			border-radius: 20px;
+			background: rgba(79, 186, 111);
+		}
+		.btn2 {
+			height: 80px;
+			width: 80px;
+			border-radius: 20px;
+			background: rgba(79, 186, 111);
+		}
+		.btn3 {
+			height: 80px;
+			width: 80px;
+			border-radius: 20px;
+			background: rgba(224, 79, 95);
+		}
+		.btn4 {
+			height: 80px;
+			width: 80px;
+			border-radius: 20px;
+			background: rgba(79, 186, 111);
+		}
+		.btn5 {
+			height: 80px;
+			width: 80px;
+			border-radius: 20px;
+			background: rgba(79, 186, 111);
+		}
+		.btn6 {
+			height: 50px;
+			width: 100px;
+			border-radius: 10px;
+			background: rgba(79, 186, 111);
+		}
+		.btn7 {
+			height: 50px;
+			width: 100px;
+			border-radius: 10px;
+			background: rgba(224, 79, 95);
+		}
+		#selectrobot {
+			height: 50px;
+			width: 800px;
+			padding: 20px;
+		}
+		#direction {
+			height: 300px;
+			width: 250px;
+			padding: 20px;
+			float: left;
+		}
+		#command {
+			height: 300px;
+			width: 500px;
+			padding: 30px;
+			float: left;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div id="selectrobot">
+		{% if robot == 'robot1' %}
+		<a href="/robot1"><button class="btn6"><b>Robot 1</b></button></a>
+		<a href="/robot2"><button class="btn7"><b>Robot 2</b></button></a>
+		<a href="/robot3"><button class="btn7"><b>Robot 3</b></button></a>
+		<a href="/robot4"><button class="btn7"><b>Robot 4</b></button></a>
+		<a href="/robot5"><button class="btn7"><b>Robot 5</b></button></a>
+		{% elif robot == 'robot2' %}
+		<a href="/robot1"><button class="btn7"><b>Robot 1</b></button></a>
+		<a href="/robot2"><button class="btn6"><b>Robot 2</b></button></a>
+		<a href="/robot3"><button class="btn7"><b>Robot 3</b></button></a>
+		<a href="/robot4"><button class="btn7"><b>Robot 4</b></button></a>
+		<a href="/robot5"><button class="btn7"><b>Robot 5</b></button></a>
+		{% elif robot == 'robot3' %}
+		<a href="/robot1"><button class="btn7"><b>Robot 1</b></button></a>
+		<a href="/robot2"><button class="btn7"><b>Robot 2</b></button></a>
+		<a href="/robot3"><button class="btn6"><b>Robot 3</b></button></a>
+		<a href="/robot4"><button class="btn7"><b>Robot 4</b></button></a>
+		<a href="/robot5"><button class="btn7"><b>Robot 5</b></button></a>
+		{% elif robot == 'robot4' %}
+		<a href="/robot1"><button class="btn7"><b>Robot 1</b></button></a>
+		<a href="/robot2"><button class="btn7"><b>Robot 2</b></button></a>
+		<a href="/robot3"><button class="btn7"><b>Robot 3</b></button></a>
+		<a href="/robot4"><button class="btn6"><b>Robot 4</b></button></a>
+		<a href="/robot5"><button class="btn7"><b>Robot 5</b></button></a>
+		{% else %}
+		<a href="/robot1"><button class="btn7"><b>Robot 1</b></button></a>
+		<a href="/robot2"><button class="btn7"><b>Robot 2</b></button></a>
+		<a href="/robot3"><button class="btn7"><b>Robot 3</b></button></a>
+		<a href="/robot4"><button class="btn7"><b>Robot 4</b></button></a>
+		<a href="/robot5"><button class="btn6"><b>Robot 5</b></button></a>
+		{% endif %}
+	</div>
+
+	<div id="direction">
+		<table>
+			<tr>
+				<td></td>
+				<td><a href="/forward"><button class="btn1"><img src="/static/forward.png"></button></a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><a href="/left"><button class="btn2"><img src="/static/left.png"></button></a></td>
+				<td><a href="/stop"><button class="btn3"><img src="/static/stop.png"></button></a></td>
+				<td><a href="/right"><button class="btn4"><img src="/static/right.png"></button></a></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><a href="/backward"><button class="btn5"><img src="/static/backward.png"></button></a></td>
+				<td></td>
+			</tr>
+		</table>	
+	</div>
+
+	<div id="command">
+		<table>
+			<tr>
+				<td>
+					<div id="speed" align="left">
+					<a href="/speedplus"><button class="btn6"><b>Speed +</b></button></a>
+					<a href="/speedminus"><button class="btn7"><b>Speed -</b></button></a>
+					<b>Speed: {{ speed }}</b>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="angle" align="left">
+						<a href="/angleplus"><button class="btn6"><b>Angle +</b></button></a>
+						<a href="/angleminus"><button class="btn7"><b>Angle -</b></button></a>
+						<b>Angle: {{ angle }}</b>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="track" align="left">
+						<a href="trackon"><button class="btn6"><b>ON</b></button></a>
+						<a href="trackoff"><button class="btn7"><b>OFF</b></button></a>
+						{% if track == 0 %}
+						<b>Line Tracking: OFF</b>
+						{% else %}
+						<b>Line Tracking: ON</b>
+						{% endif %}
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="detect" align="left">
+						<a href="detecton"><button class="btn6"><b>ON</b></button></a>
+						<a href="detectoff"><button class="btn7"><b>OFF</b></button></a>
+						{% if detect == 0 %}
+						<b>Obstacle Detecting: OFF</b>
+						{% else %}
+						<b>Obstacle Detecting: ON</b>
+						{% endif %}
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+
+
+</body>
+</html>
